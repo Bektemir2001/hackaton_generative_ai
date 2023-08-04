@@ -2,7 +2,7 @@ import time
 import logging
 from aiogram import Bot, Dispatcher, executor, types
 from env import TOKEN
-
+from model import correcctor_txt
 bot = Bot(TOKEN)
 dp = Dispatcher(bot=bot)
 
@@ -17,7 +17,8 @@ async def start_handler(message: types.Message):
 
 @dp.message_handler(state=None)
 async def message_handler(message: types.Message):
-    await message.reply(f"Вот исправленный текст\n\n{message.text}")
+    correct_txt = correcctor_txt(message.text)
+    await message.reply(f"Вот исправленный текст\n\n{correct_txt}")
 
 
 if __name__ == '__main__':
